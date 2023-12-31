@@ -28,4 +28,8 @@ const commonConfig = {
 };
 
 
-module.exports = environment.map((env) => {return {environment:env, ...commonConfig}});
+const config={};
+
+environment.forEach((env) => config[env] = {...commonConfig});
+
+module.exports = config;
