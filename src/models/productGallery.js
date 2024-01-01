@@ -1,6 +1,6 @@
 class ProductGallery{
-    constructor(product, url) {
-        this.product = product;
+    constructor(product_id, url) {
+        this.product_id = product_id;
         this.url = url;
     }
 }
