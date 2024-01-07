@@ -1,4 +1,5 @@
 const {knex, Model} = require('./index.js');
+require('dotenv').config();
 
 class ProductGallery extends Model{
     constructor(product_id, url) {
@@ -10,7 +11,11 @@ class ProductGallery extends Model{
         return 'product_galleries';
     }
 
-    //NOTE: need to add 'get url attribute'
+    urlAttribute(){
+        const prefix = process.env.URL_PREFIX;
+        return prefix + this.url;
+    }
+
 }
 
 module.exports = ProductGallery;

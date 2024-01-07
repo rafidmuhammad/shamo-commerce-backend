@@ -1,5 +1,5 @@
 require('dotenv').config();
-const knex = require('knex');
+
 
 const environment = ['development', 'staging', 'production'];
 
