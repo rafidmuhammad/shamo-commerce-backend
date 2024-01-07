@@ -1,7 +1,7 @@
 const {knex, Model} = require('./index.js');
 
 
-class TransactionItem {
+class TransactionItem extends Model {
     constructor(user_id, product_id, transaction_id, quantity) {
         this.user_id = user_id;
         this.product_id = product_id;
