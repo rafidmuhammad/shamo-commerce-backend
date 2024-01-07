@@ -24,3 +24,5 @@ class ProductCategory extends Model{
         }
     }
 }
+
+module.exports = ProductCategory;
