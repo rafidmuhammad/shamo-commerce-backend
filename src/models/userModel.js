@@ -28,3 +28,5 @@ class UserModel extends Model{
         }
     } 
 }
+
+module.exports = UserModel;
