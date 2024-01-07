@@ -1,7 +1,7 @@
 const {knex, Model} = require('./index.js');
 
 
-class UserModel extends Model{
+class User extends Model{
     constructor(username, fullname, email, password, roles) {
         this.username = username;
         this.fullname = fullname;
@@ -29,4 +29,4 @@ class UserModel extends Model{
     } 
 }
 
-module.exports = UserModel;
+module.exports = User;
