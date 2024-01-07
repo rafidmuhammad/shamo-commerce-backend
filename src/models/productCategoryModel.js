@@ -13,7 +13,7 @@ class ProductCategory extends Model{
     static get relationMappings(){
         const Product = require('./productModel');
         return{
-            transactions: {
+            categories: {
                 relation: Model.HasManyRelation,
                 modelClass: Product,
                 join: {
