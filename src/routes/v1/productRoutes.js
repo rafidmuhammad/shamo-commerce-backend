@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ResponseFormat = require('../responseFormat');
-const {Product} = require('../../models/productModel');
+const Product = require('../../models/productModel');
 
 router.get('/all', async function(req, res){
     const id = req.query.id;
@@ -53,11 +53,13 @@ router.get('/all', async function(req, res){
 
         if(productOut.length === 0){
             response = ResponseFormat.error({code:404, messageText:"Data not available", dataOut:productOut});
+            return res.status(404).json(response);
         }
         else{
             response = ResponseFormat.success({messageText:"Data successfully fetched", dataOut:productOut});
+            return res.json(response);
         }
-        return res.json(response);
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({
