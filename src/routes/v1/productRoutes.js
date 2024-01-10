@@ -12,35 +12,6 @@ router.get('/all', async function(req, res){
     const priceFrom=req.query.priceFrom;
     const priceTo = req.query.priceTo;
 
-
-    // if(id){
-    //     try {
-    //         const product = await Product.query()
-    //             .withGraphFetched('[galleries, category]')
-    //             .findById(id);
-    //         let response;
-    //         if(product !== undefined){
-    //             response = {
-    //                 message : "Data successfully fetched",
-    //                 data: product
-    //             };
-    //         }
-    //         else{
-    //             response = {
-    //                 message : "Data not found",
-    //                 code : 404
-    //             };
-    //         }
-    //         res.json(response);
-    //       } 
-    //     catch (error) {
-    //         res.status(500).json({
-    //           message: 'Internal Server Error',
-    //         });
-    //       }
-    // }
-    
-
     try {
         let productQuery = Product.query().withGraphFetched('[galleries, category]');
         let productOut;
