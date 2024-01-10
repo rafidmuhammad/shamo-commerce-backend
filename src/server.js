@@ -15,6 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1/products', require('./routes/v1/productRoutes'));
+app.use('/api/vi/categories', require('./routes/v1/productCategoryRoutes'));
 
 app.get('/', (req, res) => {
     res.send("This is root for shamo-backend project");
