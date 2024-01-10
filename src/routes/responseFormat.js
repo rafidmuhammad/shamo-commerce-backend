@@ -11,7 +11,7 @@ class ResponseFormat{
         return res;
     }
 
-    static notFound({code = 404,message =null, data = null}){
+    static error({code = 404,message =null, data = null}){
         let res = {
             'meta':{
                 'code' : code,
