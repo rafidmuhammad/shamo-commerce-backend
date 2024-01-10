@@ -1,24 +1,24 @@
 class ResponseFormat{
-    static success({message =null, data = null}){
+    static success({messageText =null, dataOut = null}){
         let res = {
-            'meta':{
-                'code' : 200,
-                'status' : 'success',
-                'message' : message
+            meta:{
+                code : 200,
+                status : 'success',
+                message : messageText
             },
-            'data':data
+            data : dataOut
         };
         return res;
     }
 
-    static error({code = 404,message =null, data = null}){
+    static error({code = 404,messageText =null, dataOut = null}){
         let res = {
-            'meta':{
-                'code' : code,
-                'status' : 'failed',
-                'message' : message
+            meta:{
+                code : code,
+                status : 'failed',
+                message : messageText
             },
-            'data':data
+            data : dataOut
         };
         return res;
     }
