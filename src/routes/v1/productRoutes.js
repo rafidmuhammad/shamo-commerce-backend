@@ -13,38 +13,49 @@ router.get('/all', async function(req, res){
     const priceTo = req.query.priceTo;
 
 
-    if(id){
-        try {
-            const product = await Product.query()
-                .withGraphFetched('[galleries, category]')
-                .findById(id);
-            let response;
-            if(product !== undefined){
-                response = {
-                    message : "Data successfully fetched",
-                    data: product
-                };
-            }
-            else{
-                response = {
-                    message : "Data not found",
-                    code : 404
-                };
-            }
-            res.json(response);
-          } 
-        catch (error) {
-            res.status(500).json({
-              message: 'Internal Server Error',
-            });
-          }
-    }
+    // if(id){
+    //     try {
+    //         const product = await Product.query()
+    //             .withGraphFetched('[galleries, category]')
+    //             .findById(id);
+    //         let response;
+    //         if(product !== undefined){
+    //             response = {
+    //                 message : "Data successfully fetched",
+    //                 data: product
+    //             };
+    //         }
+    //         else{
+    //             response = {
+    //                 message : "Data not found",
+    //                 code : 404
+    //             };
+    //         }
+    //         res.json(response);
+    //       } 
+    //     catch (error) {
+    //         res.status(500).json({
+    //           message: 'Internal Server Error',
+    //         });
+    //       }
+    // }
     
 
     try {
         let productQuery = Product.query().withGraphFetched('[galleries, category]');
         let productOut;
         let response;
+
+        if(id){
+            productOut = await productQuery.findById(id);
+            console.log(productOut);
+            if(productOut !== undefined){
+                response = ResponseFormat.success({messageText:"Data successfully fetched", dataOut:productOut});
+                return res.json(response);
+            }
+            response = ResponseFormat.error({code:404, messageText:"Data not available", dataOut:productOut});
+            return res.status(response.meta.code).json(response);
+        }
 
 
         if(name){
@@ -68,30 +79,20 @@ router.get('/all', async function(req, res){
         }
 
         productOut = await productQuery.limit(limit ? limit : 10);
-        console.log(limit ? limit : 10);
 
         if(productOut.length === 0){
-            response = {
-                message : "Data not found",
-                code : 404
-            };
+            response = ResponseFormat.error({code:404, messageText:"Data not available", dataOut:productOut});
         }
         else{
-            response = {
-                message : "Data successfully fetched",
-                data: productOut
-            };
+            response = ResponseFormat.success({messageText:"Data successfully fetched", dataOut:productOut});
         }
-        res.json(response);
+        return res.json(response);
     } catch (error) {
         console.log(error);
         res.status(500).json({
             message: 'Internal Server Error',
           });
     }
-
-
-
   });
 
 module.exports = router;
