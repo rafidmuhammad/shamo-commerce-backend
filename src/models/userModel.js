@@ -1,22 +1,32 @@
-const {knex, Model} = require('./index.js');
+const { knex, Model } = require('./index.js');
 
 
-class User extends Model{
-    constructor(username, fullname, email, password, roles) {
-        this.username = username;
-        this.fullname = fullname;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
+class User extends Model {
 
-    static get tableName(){
+    static get tableName() {
         return 'users';
     }
 
-    static get relationMappings(){
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: ['username', 'fullname', 'email_address', 'password'],
+
+            properties: {
+                id: { type: 'integer' },
+                username: { type: 'string', minLength: 1, maxLength: 255 },
+                fullname: { type: 'string', minLength: 1, maxLength: 255 },
+                email_address: { type: 'string', minLength: 1, maxLength: 255, format: 'email' },
+                password: { type: 'string', minLength: 1, maxLength: 255 },
+                role: { type: 'string' }
+            }
+
+        };
+    }
+
+    static get relationMappings() {
         const Transaction = require('./transactionModel');
-        return{
+        return {
             transactions: {
                 relation: Model.HasManyRelation,
                 modelClass: Transaction,
@@ -26,7 +36,7 @@ class User extends Model{
                 }
             },
         }
-    } 
+    }
 }
 
 module.exports = User;
