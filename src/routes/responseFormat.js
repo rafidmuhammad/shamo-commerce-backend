@@ -1,8 +1,8 @@
 class ResponseFormat{
-    static success({messageText =null, dataOut = null}){
+    static success({code=200,messageText =null, dataOut = null}){
         let res = {
             meta:{
-                code : 200,
+                code : code,
                 status : 'success',
                 message : messageText
             },
