@@ -1,28 +1,21 @@
-const {knex, Model} = require('./index.js');
+const { knex, Model } = require('./index.js');
 
 class Product extends Model {
-    constructor(name, price, description, tags, category_id) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.tags = tags;
-        this.category_id = category_id;
-    }
 
-    static get tableName(){
+    static get tableName() {
         return 'products';
     }
 
-    static get relationMappings(){
+    static get relationMappings() {
         const ProductGallery = require('./productGalleryModel');
         const ProductCategory = require('./productCategoryModel');
-        return{
+        return {
             galleries: {
                 relation: Model.HasManyRelation,
                 modelClass: ProductGallery,
                 join: {
                     from: 'products.id',
-                    to: 'product_galleries.products_id'
+                    to: 'product_galleries.product_id'
                 }
             },
 
@@ -38,4 +31,4 @@ class Product extends Model {
     }
 }
 
-module.exports = {Product};
+module.exports = Product;
