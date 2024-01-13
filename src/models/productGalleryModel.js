@@ -1,19 +1,15 @@
-const {knex, Model} = require('./index.js');
+const { knex, Model } = require('./index.js');
 require('dotenv').config();
 
-class ProductGallery extends Model{
-    constructor(product_id, url) {
-        this.product_id = product_id;
-        this.url = url;
-    }
+class ProductGallery extends Model {
 
-    static get tableName(){
+    static get tableName() {
         return 'product_galleries';
     }
 
-    urlAttribute(){
+    urlAttribute() {
         const prefix = process.env.URL_PREFIX;
-        return prefix + this.url;
+        // return prefix + this.url;
     }
 
 }
