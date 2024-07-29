@@ -2,9 +2,9 @@ const {knex, Model} = require('./index.js');
 
 
 class ProductCategory extends Model{
-    constructor(productName) {
-        this.productName = productName;
-    }
+    // constructor(productName) {
+    //     this.productName = productName;
+    // }
 
     static get tableName(){
         return 'product_categories';
@@ -13,7 +13,7 @@ class ProductCategory extends Model{
     static get relationMappings(){
         const Product = require('./productModel');
         return{
-            categories: {
+            products: {
                 relation: Model.HasManyRelation,
                 modelClass: Product,
                 join: {
