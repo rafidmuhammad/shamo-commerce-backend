@@ -6,7 +6,7 @@ const app = express();
 
 //JSON parser
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 //Allowed all origin
 app.use((req, res, next) => {
@@ -17,6 +17,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/products', require('./routes/v1/productRoutes'));
 app.use('/api/v1/categories', require('./routes/v1/productCategoryRoutes'));
 app.use('/api/v1/user', require('./routes/v1/userRoutes'));
+app.use('/api/v1/transactions', require('./routes/v1/transactionRoutes'));
 
 app.get('/', (req, res) => {
     res.send("This is root for shamo-backend project");

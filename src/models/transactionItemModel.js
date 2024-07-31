@@ -1,8 +1,9 @@
-const {knex, Model} = require('./index.js');
+const { knex, Model } = require('./index.js');
 
 
 class TransactionItem extends Model {
     constructor(user_id, product_id, transaction_id, quantity) {
+        super();
         this.user_id = user_id;
         this.product_id = product_id;
         this.transaction_id = transaction_id;
@@ -10,18 +11,18 @@ class TransactionItem extends Model {
     }
 
 
-    static get tableName(){
+    static get tableName() {
         return 'transaction_items';
     }
 
-    static get relationMappings(){
+    static get relationMappings() {
         const Product = require('./productModel');
-        return{
+        return {
             product: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Product,
                 join: {
-                    from: 'transactions_item.product_id',
+                    from: 'transaction_items.product_id',
                     to: 'products.id'
                 }
             },
@@ -29,4 +30,4 @@ class TransactionItem extends Model {
     }
 }
 
-module.exports = {TransactionItem}
+module.exports = TransactionItem;

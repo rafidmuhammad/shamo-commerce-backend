@@ -1,7 +1,8 @@
-const {knex, Model} = require('./index.js');
+const { knex, Model } = require('./index.js');
 
-class Transaction extends Model{
+class Transaction extends Model {
     constructor(user_id, address, paymentMethod, totalPrice, totalShipping, status) {
+        super();
         this.user_id = user_id;
         this.address = address;
         this.paymentMethod = paymentMethod;
@@ -10,14 +11,14 @@ class Transaction extends Model{
         this.status = status;
     }
 
-    static get tableName(){
+    static get tableName() {
         return 'transactions';
     }
 
-    static get relationMappings(){
+    static get relationMappings() {
         const User = require('./userModel');
         const TransactionItem = require('./transactionItemModel');
-        return{
+        return {
             user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
