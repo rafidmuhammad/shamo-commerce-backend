@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const port = process.env.PORT || 5000;
+const host = process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0';
 const app = express();
 
 //JSON parser
@@ -24,8 +25,8 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(port, async () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(port, host, async () => {
+    console.log(`Server is running on https://${host}:${port}`);
 });
 
 
